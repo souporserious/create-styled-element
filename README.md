@@ -12,16 +12,23 @@ Simple wrapper around [glamor](https://github.com/threepointone/glamor) to creat
 
 `npm install create-styled-element --save`
 
+## `createStyledElement`
+
+This works almost exactly like React's [create element](https://facebook.github.io/react/docs/react-api.html#createelement), except it returns a function that allows you pass default css styles and interact with props. It will also merge a `css` prop in so you can override styles later on if you need to.
+
 ## Example Usage
 
 ```js
 import createStyledElement from 'create-styled-element'
 
-const Column = ({ size, ...props }) => createStyledElement('div', props)({
-  display: 'flex',
-  flexDirection: 'column',
-  flex: `0 0 ${size / 12 * 100}`
-})
+function Column({ size, ...props }) {
+  const css = {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: `0 0 ${size / 12 * 100}`
+  }
+  return createStyledElement('div', props)(css)
+}
 
 const App = () => (
   <Column size={6} css={{ backgroundColor: '#b4da55' }}/>
