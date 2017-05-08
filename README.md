@@ -12,18 +12,20 @@ Simple wrapper around [glamor](https://github.com/threepointone/glamor) to creat
 
 `npm install create-styled-element --save`
 
-## Example Usage
+## Example
 
 ```js
 import createStyledElement from 'create-styled-element'
 
 function Column({ size, ...props }) {
-  const css = {
+  const staticStyles = {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
+  }
+  const dynamicStyles = {
     flex: `0 0 ${size / 12 * 100}`
   }
-  return createStyledElement('div', props)(css)
+  return createStyledElement('div', props)(staticStyles, dynamicStyles)
 }
 
 const App = () => (
@@ -31,9 +33,33 @@ const App = () => (
 )
 ```
 
-### `createStyledElement`
+## Usage
+
+### `createStyledElement(component[, props, children])(...css)`
 
 This works _almost_ exactly like React's [create element](https://facebook.github.io/react/docs/react-api.html#createelement), except it returns a function that allows you to pass default css styles and interact with props. It will also merge a `css` prop in so you can override styles later on if you need to.
+
+The initial CSS chunks passed to the function created by `createStyledElement` are written left to right as their own `glamor` classnames. The `css` prop will then be written as its own `glamor` classname last.
+
+By using different "chunks" of CSS you can reduce how much CSS is generated. You can see in the example above we will only ever create one class name for the static styles, whereas the dynamic styles can change over time and result in additional rules.
+
+### `built-in styled elements`
+
+stolen from [glamorous](https://github.com/paypal/glamorous#built-in-glamorouscomponents) 🙏
+
+Naming things is hard. Pre-created styled elements are exposed on the `createStyledElement` function for each DOM node type.
+
+```js
+import createStyledElement from 'create-styled-element'
+const { Section, H1 } = createStyledElement
+
+const App = () => (
+  <Section css={{ padding: 32 }}>
+    <H1 css={{ color: `rgba(0, 0, 0, 0.75)`}}>
+    </H1>
+  </Section>
+)
+```
 
 ## Running Locally
 
