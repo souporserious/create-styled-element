@@ -11,9 +11,14 @@
   "author": "Travis Arnold",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir lib",
     "dev": "webpack-dev-server --hot --progress --host 0.0.0.0",
-    "prepublish": "npm run build"
+    "build": "babel src --out-dir lib",
+    "dist": "rollup --config rollup.config.js",
+    "prepublish": "npm run build && npm run dist"
+  },
+  "peerDependencies": {
+    "glamor": ">=2",
+    "react": ">=14"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -26,18 +31,27 @@
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
     "express": "^4.15.2",
+    "glamor": "next",
     "json-loader": "^0.5.4",
     "live-server": "^1.2.0",
     "node-watch": "^0.5.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-popper": "^0.6.0",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-json": "^2.1.1",
+    "rollup-plugin-livereload": "^0.4.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-serve": "^0.3.0",
+    "rollup-watch": "^3.2.2",
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
-    "glamor": "next",
     "html-tag-names": "^1.1.1",
+    "object-assign": "^4.1.1",
     "svg-tag-names": "^1.1.0"
   }
 }

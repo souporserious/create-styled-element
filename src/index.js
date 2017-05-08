@@ -2,6 +2,7 @@ import React, { createElement } from 'react'
 import { css as glamor } from 'glamor'
 import htmlTagNames from 'html-tag-names'
 import svgTagNames from 'svg-tag-names'
+import objectAssign from 'object-assign'
 
 /*
  * This works just like React createElement, but allows us to pass default styling
@@ -55,7 +56,7 @@ const domElements = htmlTagNames
   .concat(svgTagNames)
   .filter((tag, index, array) => array.indexOf(tag) === index)
 
-Object.assign(
+objectAssign(
   createStyledElement,
   domElements.reduce((components, tag) => {
     const capitalTag = capitalize(tag)
