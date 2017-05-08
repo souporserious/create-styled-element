@@ -33,7 +33,7 @@ const App = () => (
 
 ### `createStyledElement`
 
-This works almost exactly like React's [create element](https://facebook.github.io/react/docs/react-api.html#createelement), except it returns a function that allows you to pass default css styles and interact with props. It will also merge a `css` prop in so you can override styles later on if you need to.
+This works _almost_ exactly like React's [create element](https://facebook.github.io/react/docs/react-api.html#createelement), except it returns a function that allows you to pass default css styles and interact with props. It will also merge a `css` prop in so you can override styles later on if you need to.
 
 ## Running Locally
 
