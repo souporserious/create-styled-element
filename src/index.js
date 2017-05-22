@@ -18,7 +18,13 @@ function createStyledElement(component, props, children) {
     const classNames = chunks.map(chunk => glamor(chunk))
 
     if (props) {
-      const { css, className, ...restProps } = props
+      const { innerRef, css, className, ...restProps } = props
+
+      if (typeof component === 'string') {
+        restProps.ref = innerRef
+      } else {
+        restProps.innerRef = innerRef
+      }
 
       if (css) {
         classNames.push(glamor(css))
@@ -34,11 +40,18 @@ function createStyledElement(component, props, children) {
         restProps.children || children
       )
     } else {
-      return ({ css, className = '', ...restProps }) =>
-        createElement(component, {
+      return ({ innerRef, css, className = '', ...restProps }) => {
+        if (typeof component === 'string') {
+          restProps.ref = innerRef
+        } else {
+          restProps.innerRef = innerRef
+        }
+
+        return createElement(component, {
           className: classNames.concat(glamor(css), className).join(' '),
           ...restProps,
         })
+      }
     }
   }
 }

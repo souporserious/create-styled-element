@@ -1,6 +1,6 @@
 {
   "name": "create-styled-element",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Simple wrapper around glamor to create styled elements in React.",
   "main": "lib/index.js",
   "files": [
@@ -17,7 +17,6 @@
     "prepublish": "npm run build && npm run dist"
   },
   "peerDependencies": {
-    "glamor": ">=2",
     "react": ">=14"
   },
   "devDependencies": {
@@ -31,7 +30,6 @@
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
     "express": "^4.15.2",
-    "glamor": "next",
     "json-loader": "^0.5.4",
     "live-server": "^1.2.0",
     "node-watch": "^0.5.2",
@@ -50,6 +48,7 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
+    "glamor": "3.0.0-1",
     "html-tag-names": "^1.1.1",
     "object-assign": "^4.1.1",
     "svg-tag-names": "^1.1.0"

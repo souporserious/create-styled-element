@@ -1,5 +1,12 @@
 ## CHANGELOG
 
+### 0.4.0
+Add the ability to pass `innerRef` prop
+
+### 0.3.0
+
+Add the ability to omit props when composing static styles
+
 ### 0.2.2
 
 setup `rollup` and provide a `dist` file
