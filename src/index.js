@@ -8,32 +8,38 @@ import objectAssign from 'object-assign'
  * This works just like React createElement, but allows us to pass default styling
  * as well as gives us a "css" prop that we can use to add overrides later on
  *
- * MyStyledComponent = props => createStyledElement(MyComponent, props)({
+ * MyStyledComponent = createStyledElement(MyComponent)({
  *   color: '#b4da55'
  * })
  *
  */
-function createStyledElement(
-  component,
-  { css, className, ...props } = {},
-  children
-) {
+function createStyledElement(component, props, children) {
   return (...chunks) => {
     const classNames = chunks.map(chunk => glamor(chunk))
 
-    if (css) {
-      classNames.push(glamor(css))
-    }
+    if (props) {
+      const { css, className, ...restProps } = props
 
-    if (className) {
-      classNames.push(className)
-    }
+      if (css) {
+        classNames.push(glamor(css))
+      }
 
-    return createElement(
-      component,
-      { className: classNames.join(' '), ...props },
-      props.children || children
-    )
+      if (className) {
+        classNames.push(className)
+      }
+
+      return createElement(
+        component,
+        { className: classNames.join(' '), ...restProps },
+        restProps.children || children
+      )
+    } else {
+      return ({ css, className = '', ...restProps }) =>
+        createElement(component, {
+          className: classNames.concat(glamor(css), className).join(' '),
+          ...restProps,
+        })
+    }
   }
 }
 
@@ -60,7 +66,7 @@ objectAssign(
   createStyledElement,
   domElements.reduce((components, tag) => {
     const capitalTag = capitalize(tag)
-    components[capitalTag] = props => createStyledElement(tag, props)()
+    components[capitalTag] = createStyledElement(tag)({})
     components[capitalTag].displayName = `Styled${capitalTag}`
     return components
   }, {})

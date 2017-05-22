@@ -5,10 +5,9 @@ import createStyledElement from '../src/index'
 const { Div, Section, H1 } = createStyledElement
 
 const MyComponent = props => <div {...props}>My component</div>
-const MyStyledComponent = props =>
-  createStyledElement(MyComponent, props)({
-    backgroundColor: 'orange',
-  })
+const MyStyledComponent = createStyledElement(MyComponent)({
+  backgroundColor: 'orange',
+})
 
 function Column({ size, ...props }) {
   const staticStyles = {
@@ -20,6 +19,9 @@ function Column({ size, ...props }) {
   }
   return createStyledElement('div', props)(staticStyles, dynamicStyles)
 }
+const StyledColumn = createStyledElement(Column)({
+  backgroundColor: '#b4da55',
+})
 
 class App extends Component {
   render() {
@@ -34,7 +36,7 @@ class App extends Component {
           We have styled divs!
         </Div>
         <MyStyledComponent />
-        <Column
+        <StyledColumn
           size={4}
           css={{ display: 'block', flex: '0 0 auto' }}
           children={'Column'}
