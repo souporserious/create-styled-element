@@ -25,7 +25,7 @@ const elementExports = htmlTagNames
     const validJsName = dashToCamelCase(tag)
     const capitalName = capitalize(validJsName)
     const tagName = unCollide(capitalName)
-    return `exports.${tagName} = createStyledElement['${tagName}'];`
+    return `exports.${tagName} = createStyledElement.${tagName};`
   }).join`\n`
 
 const buildFile = resolve(__dirname, './lib/index.js')

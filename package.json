@@ -1,6 +1,6 @@
 {
   "name": "create-styled-element",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Simple wrapper around glamor to create styled elements in React.",
   "main": "lib/index.js",
   "files": [
