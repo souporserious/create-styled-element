@@ -1,6 +1,6 @@
 {
   "name": "create-styled-element",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Simple wrapper around glamor to create styled elements in React.",
   "main": "lib/index.js",
   "files": [
@@ -12,7 +12,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --hot --progress --host 0.0.0.0",
-    "build": "babel src --out-dir lib",
+    "build": "babel src --out-dir lib && node export-elements.js",
     "dist": "rollup --config rollup.config.js",
     "prepublish": "npm run build && npm run dist"
   },
@@ -36,6 +36,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-popper": "^0.6.0",
+    "reserved": "^0.1.2",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
