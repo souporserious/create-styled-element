@@ -70,10 +70,14 @@ function createStyledElement(component, props, children) {
  * </createStyledElement.Div>
  *
  */
-const capitalize = str => str.charAt(0).toUpperCase() + str.substring(1)
+export const capitalize = str => str.charAt(0).toUpperCase() + str.substring(1)
 const domElements = htmlTagNames
   .concat(svgTagNames)
   .filter((tag, index, array) => array.indexOf(tag) === index)
+
+export function cool() {
+  return 'cool'
+}
 
 objectAssign(
   createStyledElement,
