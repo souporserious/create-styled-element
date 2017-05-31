@@ -3,7 +3,7 @@ const { appendFileSync } = require('fs')
 const { resolve } = require('path')
 const htmlTagNames = require('html-tag-names')
 const svgTagNames = require('svg-tag-names')
-const reserved = require('reserved')
+const reserved = Object.getOwnPropertyNames(global)
 
 function capitalize(s) {
   return s.slice(0, 1).toUpperCase() + s.slice(1)
@@ -14,10 +14,11 @@ function dashToCamelCase(s) {
 }
 
 function unCollide(name) {
-  const prefix = 'Html'
-  return reserved.includes(name) ? `${prefix}${name}` : name
+  const suffix = 'Tag'
+  return reserved.includes(name) ? `${name}${suffix}` : name
 }
 
+const buildFile = resolve(__dirname, './lib/index.js')
 const elementExports = htmlTagNames
   .concat(svgTagNames)
   .filter((tag, index, array) => array.indexOf(tag) === index)
@@ -28,7 +29,4 @@ const elementExports = htmlTagNames
     return `exports.${tagName} = createStyledElement.${tagName};`
   }).join`\n`
 
-const buildFile = resolve(__dirname, './lib/index.js')
-const toWrite = `\n${elementExports}`
-
-appendFileSync(buildFile, toWrite)
+appendFileSync(buildFile, `\n${elementExports}`)

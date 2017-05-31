@@ -1,14 +1,16 @@
 ## CHANGELOG
 
 ### 0.5.0
-Clean up unnecessary calls to glamor
+clean up unnecessary calls to glamor
+
+use `Tag` suffix for generated styled element exports
 
 ### 0.4.0
-Add the ability to pass `innerRef` prop
+add the ability to pass `innerRef` prop
 
 ### 0.3.0
 
-Add the ability to omit props when composing static styles
+add the ability to omit props when composing static styles
 
 ### 0.2.2
 

@@ -47,15 +47,17 @@ By using different "chunks" of CSS you can reduce how much CSS is generated. You
 
 stolen from [glamorous](https://github.com/paypal/glamorous#built-in-glamorouscomponents) 🙏
 
-Naming things is hard. Pre-created styled elements are exposed on the `createStyledElement` function for each DOM node type.
+Naming things is hard. Pre-created styled elements are exposed on the `createStyledElement` function, and as imports for each DOM node type.
 
 ```js
-import createStyledElement from 'create-styled-element'
-const { Section, H1 } = createStyledElement
+// tags with the same name as built-in JavaScript objects are importable with a Tag suffix
+// and tag names that contain dashes are transformed to CamelCase
+import { Section, H1, MapTag } from 'create-styled-element'
 
 const App = () => (
   <Section css={{ padding: 32 }}>
     <H1 css={{ color: `rgba(0, 0, 0, 0.75)`}}>
+      Styled Heading!
     </H1>
   </Section>
 )
