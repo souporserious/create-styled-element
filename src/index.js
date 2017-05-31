@@ -15,7 +15,7 @@ import objectAssign from 'object-assign'
  */
 function createStyledElement(component, props, children) {
   return (...chunks) => {
-    const classNames = chunks.map(chunk => glamor(chunk))
+    const classNames = chunks.map(chunk => (chunk ? glamor(chunk) : ''))
 
     if (props) {
       const { innerRef, css, className, ...restProps } = props
@@ -36,11 +36,13 @@ function createStyledElement(component, props, children) {
 
       return createElement(
         component,
-        { className: classNames.join(' '), ...restProps },
+        { className: classNames.join(' ').trim(), ...restProps },
         restProps.children || children
       )
     } else {
       return ({ innerRef, css, className = '', ...restProps }) => {
+        const glamorClass = css ? glamor(css) : ''
+
         if (typeof component === 'string') {
           restProps.ref = innerRef
         } else {
@@ -48,7 +50,7 @@ function createStyledElement(component, props, children) {
         }
 
         return createElement(component, {
-          className: classNames.concat(glamor(css), className).join(' '),
+          className: classNames.concat(glamorClass, className).join(' ').trim(),
           ...restProps,
         })
       }
@@ -79,7 +81,7 @@ objectAssign(
   createStyledElement,
   domElements.reduce((components, tag) => {
     const capitalTag = capitalize(tag)
-    components[capitalTag] = createStyledElement(tag)({})
+    components[capitalTag] = createStyledElement(tag)()
     components[capitalTag].displayName = `Styled${capitalTag}`
     return components
   }, {})

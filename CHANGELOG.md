@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### 0.5.0
+Clean up unnecessary calls to glamor
+
 ### 0.4.0
 Add the ability to pass `innerRef` prop
 
