@@ -18,13 +18,7 @@ function createStyledElement(component, props, children) {
     const classNames = chunks.map(chunk => (chunk ? glamor(chunk) : ''))
 
     if (props) {
-      const { innerRef, css, className, ...restProps } = props
-
-      if (typeof component === 'string') {
-        restProps.ref = innerRef
-      } else {
-        restProps.innerRef = innerRef
-      }
+      const { innerRef, forwardRef, css, className, ...restProps } = props
 
       if (css) {
         classNames.push(glamor(css))
@@ -36,20 +30,19 @@ function createStyledElement(component, props, children) {
 
       return createElement(
         component,
-        { className: classNames.join(' ').trim(), ...restProps },
+        {
+          [forwardRef ? 'innerRef' : 'ref']: innerRef,
+          className: classNames.join(' ').trim(),
+          ...restProps,
+        },
         restProps.children || children
       )
     } else {
-      return ({ innerRef, css, className = '', ...restProps }) => {
+      return ({ innerRef, forwardRef, css, className = '', ...restProps }) => {
         const glamorClass = css ? glamor(css) : ''
 
-        if (typeof component === 'string') {
-          restProps.ref = innerRef
-        } else {
-          restProps.innerRef = innerRef
-        }
-
         return createElement(component, {
+          [forwardRef ? 'innerRef' : 'ref']: innerRef,
           className: classNames.concat(glamorClass, className).join(' ').trim(),
           ...restProps,
         })
