@@ -1,12 +1,10 @@
 {
   "name": "create-styled-element",
-  "version": "0.5.1",
-  "description": "Simple wrapper around glamor to create styled elements in React.",
+  "version": "0.6.0",
+  "description":
+    "Simple wrapper around glamor to create styled elements in React.",
   "main": "lib/index.js",
-  "files": [
-    "dist",
-    "lib"
-  ],
+  "files": ["dist", "lib"],
   "repository": "https://github.com/souporserious/create-styled-element",
   "author": "Travis Arnold",
   "license": "MIT",
@@ -49,7 +47,7 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
-    "glamor": "3.0.0-1",
+    "glamor": "^2.20.40",
     "html-tag-names": "^1.1.1",
     "object-assign": "^4.1.1",
     "svg-tag-names": "^1.1.0"
